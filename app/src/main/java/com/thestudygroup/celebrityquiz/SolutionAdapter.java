@@ -14,15 +14,16 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.thestudygroup.celebrityquiz.vo.QuizVO;
 
 import java.util.List;
 
 public class SolutionAdapter extends RecyclerView.Adapter {
-    private List<Quiz> quizList;
+    private List<QuizVO> quizList;
     private Context context;
 
     // Constructor to initialize all arrayList
-    SolutionAdapter(List<Quiz> quizList, Context context) {
+    SolutionAdapter(List<QuizVO> quizList, Context context) {
         this.quizList = quizList;
         this.context = context;
     }
@@ -51,7 +52,7 @@ public class SolutionAdapter extends RecyclerView.Adapter {
 
         // Format recycler view content
         if(!quizList.isEmpty()) {
-            Quiz quiz = quizList.get(position);
+            QuizVO quiz = quizList.get(position);
 
             viewQuestion.setText(String.format("%s. %s", position + 1, quiz.question));
             Glide.with(imageView.getContext()).load(quiz.imageUrl).into(imageView);

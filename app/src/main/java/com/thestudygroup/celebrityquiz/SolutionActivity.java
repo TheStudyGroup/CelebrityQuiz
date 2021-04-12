@@ -9,6 +9,8 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.thestudygroup.celebrityquiz.vo.QuizVO;
+
 import java.util.List;
 import java.util.Objects;
 
@@ -29,7 +31,7 @@ public class SolutionActivity extends AppCompatActivity {
 
         // Interface instance to get values from QuizActivity
         int scoreValue = getIntent().getIntExtra("score", 0);
-        List<Quiz> quizList = (List<Quiz>) getIntent().getSerializableExtra("quizList");
+        List<QuizVO> quizList = (List<QuizVO>) getIntent().getSerializableExtra("quizList");
 
         // Set view and display scoreValue
         TextView scoreView = findViewById(R.id.scoreTextView);

@@ -9,7 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
@@ -17,13 +17,29 @@ import java.util.List;
 
 public class ExpandableListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 {
+
+    public interface OnItemClickListener {
+        void onItemClick(final View view, final ListItem listItem, final int position);
+    }
+    public interface OnItemLongClickListener {
+        void onItemLongClick(final View view, final ListItem listItem, final int position);
+    }
+
     public static final int HEADER = 0;
-    public static final int CHILD = 1;
+    public static final int CHILD  = 1;
 
-    private final List<Item> data;
+    private final List<ListItem>              data;
+    private final OnItemClickListener     listener;
+    private final OnItemLongClickListener listenerLong;
 
-    public ExpandableListAdapter(final List<Item> data) {
-        this.data = data;
+    public ExpandableListAdapter(
+        @NonNull  final List<ListItem>              data,
+        @Nullable final OnItemClickListener     listener,
+        @Nullable final OnItemLongClickListener listenerLong)
+    {
+        this.data         = data;
+        this.listener     = listener;
+        this.listenerLong = listenerLong;
     }
 
     @Override
@@ -40,50 +56,53 @@ public class ExpandableListAdapter extends RecyclerView.Adapter<RecyclerView.Vie
         return null;
     }
 
-    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
-        final Item item = data.get(position);
-        switch (item.type) {
+    public void onBindViewHolder(@NonNull final RecyclerView.ViewHolder holder, final int position) {
+        final ListItem listItem = data.get(position);
+
+        switch (listItem.type) {
             case HEADER:
-                final ListHeaderViewHolder itemController = (ListHeaderViewHolder) holder;
-                itemController.refferalItem = item;
-                itemController.textTitle.setText(item.text);
-                if (item.invisibleChildren == null) {
-                    itemController.btnExpand.setImageResource(R.drawable.ic_baseline_keyboard_arrow_up_36);
+                final ListHeaderViewHolder headerHolder = (ListHeaderViewHolder) holder;
+                headerHolder.listItem = listItem;
+                headerHolder.textView.setText(listItem.text);
+                if (listItem.invisibleChildren == null) {
+                    headerHolder.btnExpand.setImageResource(R.drawable.ic_baseline_keyboard_arrow_up_36);
                 } else {
-                    itemController.btnExpand.setImageResource(R.drawable.ic_baseline_keyboard_arrow_down_36);
+                    headerHolder.btnExpand.setImageResource(R.drawable.ic_baseline_keyboard_arrow_down_36);
                 }
-//                itemController.btn_expand_toggle.setOnClickListener(new View.OnClickListener() {
-                itemController.layout.setOnClickListener(new View.OnClickListener() {
+
+//                headerViewHolder.btn_expand_toggle.setOnClickListener(new View.OnClickListener() {
+                headerHolder.itemView.setOnClickListener(new View.OnClickListener() {
                     @Override
-                    public void onClick(View v) {
-                        if (item.invisibleChildren == null) {
-                            item.invisibleChildren = new ArrayList<Item>();
+                    public void onClick(final View view) {
+                        if (listItem.invisibleChildren == null) {
+                            listItem.invisibleChildren = new ArrayList<ListItem>();
                             int count = 0;
-                            int pos = data.indexOf(itemController.refferalItem);
+                            int pos = data.indexOf(headerHolder.listItem);
                             while (data.size() > pos + 1 && data.get(pos + 1).type == CHILD) {
-                                item.invisibleChildren.add(data.remove(pos + 1));
+                                listItem.invisibleChildren.add(data.remove(pos + 1));
                                 count++;
                             }
                             notifyItemRangeRemoved(pos + 1, count);
-                            itemController.btnExpand.setImageResource(R.drawable.ic_baseline_keyboard_arrow_down_36);
+                            headerHolder.btnExpand.setImageResource(R.drawable.ic_baseline_keyboard_arrow_down_36);
                         } else {
-                            int pos = data.indexOf(itemController.refferalItem);
+                            int pos = data.indexOf(headerHolder.listItem);
                             int index = pos + 1;
-                            for (Item i : item.invisibleChildren) {
+                            for (ListItem i : listItem.invisibleChildren) {
                                 data.add(index, i);
                                 index++;
                             }
                             notifyItemRangeInserted(pos + 1, index - pos - 1);
-                            itemController.btnExpand.setImageResource(R.drawable.ic_baseline_keyboard_arrow_up_36);
-                            item.invisibleChildren = null;
+                            headerHolder.btnExpand.setImageResource(R.drawable.ic_baseline_keyboard_arrow_up_36);
+                            listItem.invisibleChildren = null;
                         }
                     }
                 });
                 break;
+
             case CHILD:
-                final ListChildViewHolder itemController1 = (ListChildViewHolder) holder;
-                itemController1.refferalItem = item;
-                itemController1.textTitle.setText(item.text);
+                final ListChildViewHolder childHolder = (ListChildViewHolder) holder;
+                childHolder.listItem = listItem;
+                childHolder.textView.setText(listItem.text);
                 break;
         }
     }
@@ -98,40 +117,91 @@ public class ExpandableListAdapter extends RecyclerView.Adapter<RecyclerView.Vie
         return data.size();
     }
 
-    private static class ListHeaderViewHolder extends RecyclerView.ViewHolder {
-        public ConstraintLayout layout;
-        public TextView         textTitle;
-        public ImageView        btnExpand;
-        public Item refferalItem;
 
-        public ListHeaderViewHolder(View itemView) {
+
+
+
+    public class ListViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnLongClickListener {
+        public ListItem listItem;
+        public View     itemView;
+        public TextView textView;
+
+        public ListViewHolder(final View itemView) {
             super(itemView);
-            layout    = itemView.findViewById(R.id.list_header_root);
-            textTitle = itemView.findViewById(R.id.list_header_title);
+            this.itemView = itemView;
+            itemView.setOnClickListener(this);
+            itemView.setOnLongClickListener(this);
+        }
+
+        @Override
+        public void onClick(final View view) {
+            if (listener != null) {
+                listener.onItemClick(view, listItem, getBindingAdapterPosition());
+            }
+        }
+
+        @Override
+        public boolean onLongClick(final View view) {
+            if (listenerLong != null) {
+                listenerLong.onItemLongClick(view, listItem, getBindingAdapterPosition());
+            }
+            return false;
+        }
+    }
+
+    private class ListHeaderViewHolder extends ListViewHolder {
+        public ImageView btnExpand;
+
+        public ListHeaderViewHolder(final View itemView) {
+            super(itemView);
+            textView  = itemView.findViewById(R.id.list_header_title);
             btnExpand = itemView.findViewById(R.id.list_header_expand);
         }
     }
 
-    private static class ListChildViewHolder extends RecyclerView.ViewHolder {
-        public TextView    textTitle;
+    private class ListChildViewHolder extends ListViewHolder {
         public ImageButton btnStart;
-        public Item refferalItem;
 
-        public ListChildViewHolder(View itemView) {
+        public ListChildViewHolder(final View itemView) {
             super(itemView);
-            textTitle = itemView.findViewById(R.id.list_child_title);
-            btnStart  = itemView.findViewById(R.id.list_child_btn);
+            textView = itemView.findViewById(R.id.list_child_title);
+            btnStart = itemView.findViewById(R.id.list_child_btn);
         }
     }
 
-    public static class Item {
-        public int type;
-        public String text;
-        public List<Item> invisibleChildren;
 
-        public Item(int type, String text) {
+
+
+    public static class ListItem {
+        private final int     type;
+        private String        text;
+        private String        hiddenText;
+        public List<ListItem> invisibleChildren;
+
+        public ListItem(final int type, final String text) {
             this.type = type;
             this.text = text;
         }
+        public ListItem(final int type, final String text, final String hiddenText) {
+            this(type, text);
+            this.hiddenText = hiddenText;
+        }
+
+        public int    getType()       { return type;       }
+        public String getText()       { return text;       }
+        public String getHiddenText() { return hiddenText; }
+        public void   setText      (final String text)       { this.text = text;             }
+        public void   setHiddenText(final String hiddenText) { this.hiddenText = hiddenText; }
+
+        public boolean isHeader() { return type == HEADER; }
+        public boolean isChild()  { return type == CHILD;  }
+
+        @NonNull
+        @Override
+        public String toString() {
+            return "ListItem[type=" + (type == HEADER ? "HEADER" : "CHILD") + ", text=" + text + ", hidden=" + hiddenText + "]";
+        }
     }
 }
+
+
