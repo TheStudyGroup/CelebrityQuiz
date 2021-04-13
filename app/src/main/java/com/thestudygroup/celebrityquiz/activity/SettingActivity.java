@@ -1,10 +1,12 @@
-package com.thestudygroup.celebrityquiz;
+package com.thestudygroup.celebrityquiz.activity;
 
 import android.os.Bundle;
 import android.view.View;
 import android.widget.RadioButton;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.thestudygroup.celebrityquiz.R;
 
 public class SettingActivity extends AppCompatActivity {
 

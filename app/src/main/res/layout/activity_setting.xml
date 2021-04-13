@@ -9,7 +9,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:layout_gravity="center"
-    tools:context=".SettingActivity">
+    tools:context=".activity.SettingActivity">
 
     <!-- Level of Difficulty -->
     <ImageView

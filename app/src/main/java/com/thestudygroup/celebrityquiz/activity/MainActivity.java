@@ -1,4 +1,4 @@
-package com.thestudygroup.celebrityquiz;
+package com.thestudygroup.celebrityquiz.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -6,6 +6,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+
+import com.thestudygroup.celebrityquiz.R;
+
+import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener
 {
@@ -18,6 +22,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        Objects.requireNonNull(getSupportActionBar()).hide();
 
         btnStart   = (Button)findViewById(R.id.main_btn_start);
         btnRecord  = (Button)findViewById(R.id.main_btn_record);

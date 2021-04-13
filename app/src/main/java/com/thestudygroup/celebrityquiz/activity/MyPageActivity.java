@@ -1,8 +1,10 @@
-package com.thestudygroup.celebrityquiz;
+package com.thestudygroup.celebrityquiz.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+
+import com.thestudygroup.celebrityquiz.R;
 
 public class MyPageActivity extends AppCompatActivity
 {

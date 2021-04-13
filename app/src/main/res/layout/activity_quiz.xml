@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    tools:context=".QuizActivity">
+    tools:context=".activity.QuizActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/quiz_layout"
@@ -18,7 +18,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView
-            android:id="@+id/celebrityQuestion"
+            android:id="@+id/quiz_content"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="30dp"
@@ -28,114 +28,133 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
-            android:id="@+id/celebrityImage"
-            android:layout_width="150dp"
-            android:layout_height="150dp"
-            android:layout_marginStart="50dp"
+            android:id="@+id/quiz_image"
+            android:layout_width="170dp"
+            android:layout_height="170dp"
             android:layout_marginTop="30dp"
-            android:background="@drawable/image_shape_orange"
+            android:background="@android:color/transparent"
             android:contentDescription="@null"
             android:elevation="2dp"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/celebrityQuestion"
+            app:layout_constraintTop_toBottomOf="@+id/quiz_content"
             tools:ignore="UnusedAttribute" />
 
         <RadioGroup
-            android:id="@+id/celebrityOption"
+            android:id="@+id/quiz_radio_group"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="30dp"
+            android:layout_marginStart="32dp"
             android:layout_marginTop="30dp"
+            android:layout_marginEnd="32dp"
             android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/celebrityImage">
+            app:layout_constraintTop_toBottomOf="@+id/quiz_image">
 
             <RadioButton
-                android:id="@+id/radioButtonTwo"
+                android:id="@+id/quiz_radio1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
             <RadioButton
-                android:id="@+id/radioButtonOne"
+                android:id="@+id/quiz_radio2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
             <RadioButton
-                android:id="@+id/radioButtonThree"
+                android:id="@+id/quiz_radio3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
             <RadioButton
-                android:id="@+id/radioButtonFour"
+                android:id="@+id/quiz_radio4"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
+
         </RadioGroup>
 
+        <EditText
+            android:id="@+id/quiz_input"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginEnd="32dp"
+            android:ems="10"
+            android:hint="@string/quiz_input_hint"
+            android:inputType="text"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/quiz_image" />
+
         <Button
-            android:id="@+id/buttonPrevious"
+            android:id="@+id/quiz_btn_previous"
             android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="30dp"
             android:layout_marginTop="40dp"
             android:background="@drawable/button_rounded"
             android:elevation="2dp"
-            android:onClick="onButtonPrevious"
+            android:onClick="onClick"
             android:text="@string/previous"
             android:textAllCaps="false"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/celebrityOption" />
+            app:layout_constraintTop_toBottomOf="@+id/quiz_radio_group" />
 
         <Button
-            android:id="@+id/buttonNext"
+            android:id="@+id/quiz_btn_next"
             android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="40dp"
             android:layout_marginEnd="30dp"
             android:background="@drawable/button_rounded"
             android:elevation="2dp"
-            android:onClick="onButtonNext"
+            android:onClick="onClick"
             android:text="@string/next"
             android:textAllCaps="false"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/celebrityOption" />
+            app:layout_constraintTop_toBottomOf="@+id/quiz_radio_group" />
 
         <Button
-            android:id="@+id/buttonSubmit"
+            android:id="@+id/quiz_btn_submit"
             android:layout_width="350dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
             android:background="@drawable/button_rounded"
             android:elevation="2dp"
             android:gravity="center"
+            android:onClick="onClick"
             android:text="@string/submit"
             android:textAllCaps="false"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/buttonNext" />
+            app:layout_constraintTop_toBottomOf="@+id/quiz_btn_next" />
 
         <ImageView
-            android:id="@+id/scoreViewBackground"
+            android:id="@+id/quiz_score_back"
             android:layout_width="80dp"
             android:layout_height="80dp"
             android:layout_marginTop="30dp"
             android:contentDescription="@null"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/buttonSubmit"
+            app:layout_constraintTop_toBottomOf="@+id/quiz_btn_submit"
             app:srcCompat="@drawable/button_rounded" />
 
         <TextView
-            android:id="@+id/textTime"
+            android:id="@+id/quiz_score"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
             android:textColor="@color/colorPrimary"
             android:textSize="30sp"
             android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="@+id/scoreViewBackground"
-            app:layout_constraintEnd_toEndOf="@+id/scoreViewBackground"
-            app:layout_constraintStart_toStartOf="@id/scoreViewBackground"
-            app:layout_constraintTop_toTopOf="@+id/scoreViewBackground" />
+            app:layout_constraintBottom_toBottomOf="@+id/quiz_score_back"
+            app:layout_constraintEnd_toEndOf="@+id/quiz_score_back"
+            app:layout_constraintStart_toStartOf="@id/quiz_score_back"
+            app:layout_constraintTop_toTopOf="@+id/quiz_score_back" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -144,34 +163,33 @@
         android:id="@+id/quiz_loading"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView
-            android:id="@+id/select_message"
+            android:id="@+id/quiz_loading_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="300dp"
-            android:text="Downloading Quiz List ..."
+            android:text="@string/quiz_loading_text"
             android:textSize="18sp"
             android:visibility="visible"
-            app:layout_constraintBottom_toTopOf="@+id/quiz_progress"
+            app:layout_constraintBottom_toTopOf="@+id/quiz_loading_progress"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <ProgressBar
-            android:id="@+id/quiz_progress"
+            android:id="@+id/quiz_loading_progress"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
             android:indeterminate="true"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/select_message" />
+            app:layout_constraintTop_toBottomOf="@+id/quiz_loading_text" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

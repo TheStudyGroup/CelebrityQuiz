@@ -1,4 +1,4 @@
-package com.thestudygroup.celebrityquiz;
+package com.thestudygroup.celebrityquiz.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -9,12 +9,15 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.thestudygroup.celebrityquiz.R;
+import com.thestudygroup.celebrityquiz.adapter.SolutionAdapter;
 import com.thestudygroup.celebrityquiz.vo.QuizVO;
 
 import java.util.List;
 import java.util.Objects;
 
-public class SolutionActivity extends AppCompatActivity {
+public class SolutionActivity extends AppCompatActivity
+{
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,7 +49,7 @@ public class SolutionActivity extends AppCompatActivity {
 
         // RecycleView definitions
         RecyclerView recyclerView = findViewById(R.id.recyclerView);
-        SolutionAdapter solutionAdapter = new SolutionAdapter(quizList, this);
+        SolutionAdapter solutionAdapter = new SolutionAdapter(quizList);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(solutionAdapter);
     }

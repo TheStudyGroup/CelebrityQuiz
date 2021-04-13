@@ -1,4 +1,4 @@
-package com.thestudygroup.celebrityquiz;
+package com.thestudygroup.celebrityquiz.activity;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -12,6 +12,8 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
+import com.thestudygroup.celebrityquiz.adapter.ExpandableListAdapter;
+import com.thestudygroup.celebrityquiz.R;
 import com.thestudygroup.celebrityquiz.vo.MenuChildVO;
 import com.thestudygroup.celebrityquiz.vo.MenuHeaderVO;
 
@@ -26,8 +28,8 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 
-import static com.thestudygroup.celebrityquiz.ExpandableListAdapter.CHILD;
-import static com.thestudygroup.celebrityquiz.ExpandableListAdapter.HEADER;
+import static com.thestudygroup.celebrityquiz.adapter.ExpandableListAdapter.CHILD;
+import static com.thestudygroup.celebrityquiz.adapter.ExpandableListAdapter.HEADER;
 
 public class CategoryActivity extends AppCompatActivity implements ExpandableListAdapter.OnItemClickListener
 {
@@ -40,8 +42,8 @@ public class CategoryActivity extends AppCompatActivity implements ExpandableLis
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_category);
-        layoutLoading = findViewById(R.id.select_loading);
-        recyclerView  = findViewById(R.id.select_recyclerview);
+        layoutLoading = findViewById(R.id.cat_loading);
+        recyclerView  = findViewById(R.id.cat_recyclerview);
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         menuList = new ArrayList<>();
