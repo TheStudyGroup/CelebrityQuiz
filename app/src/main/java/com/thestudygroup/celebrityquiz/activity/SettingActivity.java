@@ -8,6 +8,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.thestudygroup.celebrityquiz.R;
 
+import java.util.Objects;
+
 public class SettingActivity extends AppCompatActivity {
 
     // Declare Variables
@@ -25,6 +27,7 @@ public class SettingActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_setting);
+        Objects.requireNonNull(getSupportActionBar()).hide();
 
         // Define Level views
         radioButtonLevelOne = findViewById(R.id.radioButtonLevelOne);
