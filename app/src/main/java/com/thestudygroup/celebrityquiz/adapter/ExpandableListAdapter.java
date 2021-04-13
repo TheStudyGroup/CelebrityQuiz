@@ -1,4 +1,4 @@
-package com.thestudygroup.celebrityquiz;
+package com.thestudygroup.celebrityquiz.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -11,6 +11,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.thestudygroup.celebrityquiz.R;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,7 +30,7 @@ public class ExpandableListAdapter extends RecyclerView.Adapter<RecyclerView.Vie
     public static final int HEADER = 0;
     public static final int CHILD  = 1;
 
-    private final List<ListItem>              data;
+    private final List<ListItem>          data;
     private final OnItemClickListener     listener;
     private final OnItemLongClickListener listenerLong;
 
@@ -43,14 +45,14 @@ public class ExpandableListAdapter extends RecyclerView.Adapter<RecyclerView.Vie
     }
 
     @Override
-    public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int type) {
-        final LayoutInflater inflater = (LayoutInflater) parent.getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        switch (type) {
+    public RecyclerView.ViewHolder onCreateViewHolder(@NonNull final ViewGroup viewGroup, final int viewType) {
+        final LayoutInflater inflater = (LayoutInflater) viewGroup.getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        switch (viewType) {
             case HEADER:
-                final View viewHeader = inflater.inflate(R.layout.layout_list_header, parent, false);
+                final View viewHeader = inflater.inflate(R.layout.layout_list_header, viewGroup, false);
                 return new ListHeaderViewHolder(viewHeader);
             case CHILD:
-                final View viewChild = inflater.inflate(R.layout.layout_list_child, parent, false);
+                final View viewChild = inflater.inflate(R.layout.layout_list_child, viewGroup, false);
                 return new ListChildViewHolder(viewChild);
         }
         return null;
