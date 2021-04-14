@@ -16,16 +16,16 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.thestudygroup.celebrityquiz.R;
-import com.thestudygroup.celebrityquiz.vo.QuizVO;
+import com.thestudygroup.celebrityquiz.vo.QuestionVO;
 
 import java.util.List;
 import java.util.Objects;
 
 public class SolutionAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 {
-    private final List<QuizVO> quizList;
+    private final List<QuestionVO> quizList;
 
-    public SolutionAdapter(@NonNull final List<QuizVO> quizList) {
+    public SolutionAdapter(@NonNull final List<QuestionVO> quizList) {
         this.quizList = quizList;
     }
 
@@ -52,7 +52,7 @@ public class SolutionAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         final RadioButton radioButton4 = viewHolder.itemView.findViewById(R.id.solution_radio4);
         final EditText    textAnswer   = viewHolder.itemView.findViewById(R.id.solution_answer_right);
         final EditText    textUser     = viewHolder.itemView.findViewById(R.id.solution_answer_user);
-        final QuizVO      quiz         = quizList.get(position);
+        final QuestionVO quiz         = quizList.get(position);
 
         viewQuestion.setText(String.format("%s. %s", position + 1, quiz.question));
         Glide.with(imageView.getContext()).load(quiz.imageUrl).into(imageView);

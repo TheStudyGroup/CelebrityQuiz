@@ -4,7 +4,7 @@ import androidx.annotation.NonNull;
 
 import java.io.Serializable;
 
-public class QuizVO implements Serializable
+public class QuestionVO implements Serializable
 {
     public String question;
     public String imageUrl;
@@ -15,7 +15,7 @@ public class QuizVO implements Serializable
     public int correctAnswer;
     public int userAnswer;
 
-    public QuizVO(
+    public QuestionVO(
             @NonNull final String question,
             final String imageUrl,
             final String one,

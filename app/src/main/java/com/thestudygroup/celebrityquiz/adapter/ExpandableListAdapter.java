@@ -44,6 +44,7 @@ public class ExpandableListAdapter extends RecyclerView.Adapter<RecyclerView.Vie
         this.listenerLong = listenerLong;
     }
 
+    @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull final ViewGroup viewGroup, final int viewType) {
         final LayoutInflater inflater = (LayoutInflater) viewGroup.getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -52,10 +53,10 @@ public class ExpandableListAdapter extends RecyclerView.Adapter<RecyclerView.Vie
                 final View viewHeader = inflater.inflate(R.layout.layout_list_header, viewGroup, false);
                 return new ListHeaderViewHolder(viewHeader);
             case CHILD:
+            default:
                 final View viewChild = inflater.inflate(R.layout.layout_list_child, viewGroup, false);
                 return new ListChildViewHolder(viewChild);
         }
-        return null;
     }
 
     public void onBindViewHolder(@NonNull final RecyclerView.ViewHolder holder, final int position) {
@@ -168,6 +169,7 @@ public class ExpandableListAdapter extends RecyclerView.Adapter<RecyclerView.Vie
             super(itemView);
             textView = itemView.findViewById(R.id.list_child_title);
             btnStart = itemView.findViewById(R.id.list_child_btn);
+            btnStart.setOnClickListener(this);
         }
     }
 

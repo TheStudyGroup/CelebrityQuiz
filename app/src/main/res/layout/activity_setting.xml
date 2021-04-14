@@ -27,13 +27,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="60dp"
         android:layout_marginEnd="32dp"
         android:background="@drawable/border_setting_item"
+        android:gravity="center"
         android:orientation="vertical"
-        android:padding="8dp"
+        android:padding="16dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/setting_title">
 
@@ -47,24 +47,27 @@
             android:id="@+id/radioGroupTime"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp">
+            android:layout_marginTop="8dp">
 
             <RadioButton
                 android:id="@+id/radioButton30"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:onClick="onClick"
                 android:text="@string/seconds30" />
 
             <RadioButton
                 android:id="@+id/radioButton60"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:onClick="onClick"
                 android:text="@string/seconds60" />
 
             <RadioButton
                 android:id="@+id/radioButton90"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:onClick="onClick"
                 android:text="@string/seconds90" />
         </RadioGroup>
     </LinearLayout>
@@ -76,10 +79,10 @@
         android:layout_marginTop="32dp"
         android:layout_marginEnd="32dp"
         android:background="@drawable/border_setting_item"
+        android:gravity="center"
         android:orientation="vertical"
-        android:padding="8dp"
+        android:padding="16dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout">
 
@@ -92,25 +95,29 @@
         <RadioGroup
             android:id="@+id/levelRadioGroup"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp">
 
             <RadioButton
                 android:id="@+id/radioButtonLevelOne"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/level1" />
+                android:onClick="onClick"
+                android:text="Level One" />
 
             <RadioButton
                 android:id="@+id/radioButtonLevelTwo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/level2" />
+                android:onClick="onClick"
+                android:text="Level Two" />
 
             <RadioButton
                 android:id="@+id/radioButtonLevelThree"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/level3" />
+                android:onClick="onClick"
+                android:text="Level Three" />
         </RadioGroup>
 
     </LinearLayout>

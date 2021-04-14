@@ -3,7 +3,6 @@ package com.thestudygroup.celebrityquiz.activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -13,29 +12,25 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
 import com.bumptech.glide.Glide;
 import com.google.gson.Gson;
 import com.thestudygroup.celebrityquiz.R;
-import com.thestudygroup.celebrityquiz.vo.QuizVO;
+import com.thestudygroup.celebrityquiz.common.PreferenceManager;
+import com.thestudygroup.celebrityquiz.download.DownloadListener;
+import com.thestudygroup.celebrityquiz.download.DownloadTask;
+import com.thestudygroup.celebrityquiz.vo.QuestionVO;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Objects;
 
-import okhttp3.Call;
-import okhttp3.Callback;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.Response;
-
-public class QuizActivity extends AppCompatActivity implements View.OnClickListener
+public class QuizActivity extends AppCompatActivity implements View.OnClickListener, DownloadListener
 {
-    private QuizVO[] quizList;
+    private String       quizName;
+    private QuestionVO[] questions;
     private int seconds;
     private int currentQuizIndex;
 
@@ -79,15 +74,14 @@ public class QuizActivity extends AppCompatActivity implements View.OnClickListe
         buttonPrevious = findViewById(R.id.quiz_btn_previous);
         buttonSubmit   = findViewById(R.id.quiz_btn_submit);
         radioGroup.setOnCheckedChangeListener(null);
-        Intent intent = getIntent();
-        final String jsonUrl = intent.getStringExtra("url");
 
-        seconds = intent.getIntExtra("seconds", 30);
-
+        seconds = PreferenceManager.getInt(this, "second", 90);
         layoutQuiz.setVisibility(View.INVISIBLE);
         layoutLoading.setVisibility(View.VISIBLE);
 
-        downloadFromUrl(jsonUrl);
+        final Intent intent = getIntent();
+        quizName = intent.getStringExtra("name");
+        DownloadTask.start(this, intent.getStringExtra("url"));
     }
 
     @Override
@@ -106,9 +100,16 @@ public class QuizActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
-    private void onDownloadResponse(final String data) {
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        stopTimer();
+    }
+
+    @Override
+    public void onDownloadResponse(final String data) {
         final Gson gson = new Gson();
-        quizList = gson.fromJson(data, QuizVO[].class);
+        questions = gson.fromJson(data, QuestionVO[].class);
 
         currentQuizIndex = 0;
         displayQuiz();
@@ -118,45 +119,16 @@ public class QuizActivity extends AppCompatActivity implements View.OnClickListe
         startTimer();
     }
 
-    private void onDownloadFailure() {
+    @Override
+    public void onDownloadFailure() {
         Toast.makeText(this, "Failed to load data.", Toast.LENGTH_SHORT).show();
         finish();
     }
 
-    private void downloadFromUrl(final String url) {
-        final OkHttpClient client  = new OkHttpClient();
-        final Request      request = new Request.Builder().url(url).build();
-        client.newCall(request).enqueue(new Callback() {
-            @Override
-            public void onFailure(@NonNull Call call, @NonNull IOException e) {
-                e.printStackTrace();
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() { onDownloadFailure(); }
-                });
-            }
-            @Override
-            public void onResponse(@NonNull Call call, @NonNull Response response) {
-                try {
-                    final String data = Objects.requireNonNull(response.body()).string();
-                    runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() { onDownloadResponse(data); }
-                    });
-                } catch (Exception e) {
-                    e.printStackTrace();
-                    runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() { onDownloadFailure(); }
-                    });
-                }
-            }
-        });
-    }
 
 
     private void displayQuiz() {
-        final QuizVO quiz = quizList[currentQuizIndex];
+        final QuestionVO quiz = questions[currentQuizIndex];
         questionView.setText(String.format("%s. %s", currentQuizIndex + 1, quiz.question));
         Glide.with(imageView.getContext()).load(quiz.imageUrl).into(imageView);
 
@@ -185,17 +157,16 @@ public class QuizActivity extends AppCompatActivity implements View.OnClickListe
         }
 
         buttonPrevious.setEnabled(currentQuizIndex != 0);
-        buttonNext.setEnabled(currentQuizIndex != (quizList.length - 1));
+        buttonNext.setEnabled(currentQuizIndex != (questions.length - 1));
     }
 
     private void setUserAnswer() {
-        final QuizVO quiz = quizList[currentQuizIndex];
+        final QuestionVO quiz = questions[currentQuizIndex];
         if (quiz.correctAnswer != 0) {
             if (radioButton1.isChecked()) quiz.userAnswer = 1;
             if (radioButton2.isChecked()) quiz.userAnswer = 2;
             if (radioButton3.isChecked()) quiz.userAnswer = 3;
             if (radioButton4.isChecked()) quiz.userAnswer = 4;
-            Log.e("a","setUserAnswer " + Integer.toString(quiz.userAnswer));
         } else {
             quiz.two = textInput.getText().toString();
         }
@@ -203,7 +174,7 @@ public class QuizActivity extends AppCompatActivity implements View.OnClickListe
 
     private int getScore() {
         int score = 0;
-        for (final QuizVO quiz : quizList) {
+        for (final QuestionVO quiz : questions) {
             if (quiz.correctAnswer != 0) {
                 if (quiz.userAnswer == quiz.correctAnswer) {
                     score++;
@@ -220,15 +191,23 @@ public class QuizActivity extends AppCompatActivity implements View.OnClickListe
     private void submitResult() {
         setUserAnswer();
         stopTimer();
-        final Intent i = new Intent(QuizActivity.this, SolutionActivity.class);
-        i.putExtra("score", getScore());
-        final ArrayList<QuizVO> list = new ArrayList<>(Arrays.asList(quizList));
-        i.putExtra("quizList", list);
-        i.setFlags(Intent. FLAG_ACTIVITY_CLEAR_TOP | Intent. FLAG_ACTIVITY_SINGLE_TOP );
-        startActivity(i);
+
+        final int bestScore    = PreferenceManager.getInt(this, "best_score",    0);
+        final int totalScore   = PreferenceManager.getInt(this, "total_score",   0) + getScore();
+        final int totalSolved  = PreferenceManager.getInt(this, "total_solved",  0) + 1;
+        PreferenceManager.setInt(this, "best_score",   Math.max(bestScore, getScore()));
+        PreferenceManager.setInt(this, "total_score",  totalScore);
+        PreferenceManager.setInt(this, "total_solved", totalSolved);
+
+        final ArrayList<QuestionVO> list = new ArrayList<>(Arrays.asList(questions));
+        final Intent intent = new Intent(QuizActivity.this, SolutionActivity.class);
+        intent.putExtra("name", quizName);
+        intent.putExtra("score", getScore());
+        intent.putExtra("quizList", list);
+        intent.setFlags(Intent. FLAG_ACTIVITY_CLEAR_TOP | Intent. FLAG_ACTIVITY_SINGLE_TOP );
+        startActivity(intent);
         finish();
     }
-
 
 
     private void startTimer() {
