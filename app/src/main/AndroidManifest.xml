@@ -13,7 +13,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activity.RankingActivity"></activity>
+
+        <activity android:name=".activity.RankingActivity" />
         <activity android:name=".activity.LoginActivity" />
         <activity android:name=".activity.MainActivity">
             <intent-filter>
@@ -29,9 +30,8 @@
         <activity
             android:name=".activity.QuizActivity"
             android:parentActivityName=".activity.SettingActivity" />
-        <activity
-            android:name=".activity.SolutionActivity"
-            android:parentActivityName=".activity.SettingActivity" />
+        <activity android:name=".activity.SolutionActivity" />
+        <activity android:name=".activity.ScoreActivity" />
     </application>
 
 </manifest>

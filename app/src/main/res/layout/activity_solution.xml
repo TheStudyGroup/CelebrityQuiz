@@ -15,7 +15,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <!-- Score view background -->
     <ImageView
         android:id="@+id/scoreViewBackground"
         android:layout_width="100dp"
@@ -27,7 +26,6 @@
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/button_rounded" />
 
-    <!-- Score view divider -->
     <View
         android:id="@+id/scoreViewDivider"
         style="@style/HorizontalDivider"
@@ -39,7 +37,6 @@
         app:layout_constraintStart_toStartOf="@+id/scoreViewBackground"
         app:layout_constraintTop_toTopOf="@+id/scoreViewBackground" />
 
-    <!-- Score view display -->
     <TextView
         android:id="@+id/scoreTextView"
         android:layout_width="wrap_content"
@@ -51,7 +48,6 @@
         app:layout_constraintEnd_toEndOf="@+id/scoreViewBackground"
         app:layout_constraintStart_toStartOf="@id/scoreViewBackground"/>
 
-    <!-- Total Score view display -->
     <TextView
         android:id="@+id/scoreTotalTextView"
         android:layout_width="wrap_content"
@@ -62,8 +58,5 @@
         app:layout_constraintEnd_toEndOf="@+id/scoreViewBackground"
         app:layout_constraintStart_toStartOf="@id/scoreViewBackground"
         app:layout_constraintTop_toBottomOf="@+id/scoreViewDivider" />
-
-    <!-- Well done view display -->
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -16,7 +16,7 @@
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/main_title"
-        app:srcCompat="@drawable/main_background" />
+        app:srcCompat="@drawable/image_main" />
 
     <TextView
         android:id="@+id/main_title"

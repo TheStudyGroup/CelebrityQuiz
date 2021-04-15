@@ -1,7 +1,5 @@
 package com.thestudygroup.celebrityquiz.vo;
 
-import androidx.annotation.NonNull;
-
 import java.io.Serializable;
 
 public class QuestionVO implements Serializable
@@ -16,22 +14,22 @@ public class QuestionVO implements Serializable
     public int userAnswer;
 
     public QuestionVO(
-            @NonNull final String question,
+            final String question,
             final String imageUrl,
             final String one,
             final String two,
             final String three,
             final String four,
-            final int correctAnswer,
-            final int userAnswer)
+            final int    correctAnswer,
+            final int    userAnswer)
     {
-        this.question = question;
-        this.imageUrl = imageUrl;
-        this.one = one;
-        this.two = two;
-        this.three = three;
-        this.four = four;
+        this.question      = question;
+        this.imageUrl      = imageUrl;
+        this.one           = one;
+        this.two           = two;
+        this.three         = three;
+        this.four          = four;
         this.correctAnswer = correctAnswer;
-        this.userAnswer = userAnswer;
+        this.userAnswer    = userAnswer;
     }
 }

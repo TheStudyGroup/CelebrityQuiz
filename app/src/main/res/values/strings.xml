@@ -18,16 +18,22 @@
     <string name="previous">Previous</string>
     <string name="next">Next</string>
     <string name="submit">Submit</string>
-    <string name="update">Update from Internet</string>
     <string name="startQuiz">Start Quiz</string>
 
 
-    <string name="cat_title">Category Select</string>
-    <string name="cat_loading_text">Downloading Category List ...</string>
+    <string name="category_json_url">https://pastebin.com/raw/anZLdKMv</string>
+    <string name="category_title">Category Select</string>
+    <string name="category_loading_text">Downloading Category List ...</string>
 
     <string name="quiz_loading_text">Downloading Quiz Content ...</string>
     <string name="quiz_input_hint">Enter your answer</string>
 
+
+    <string name="score_title">Your Score is</string>
+    <string name="score_quiz_name">Quiz Name: %1$s</string>
+    <string name="score_zero">0</string>
+    <string name="score_btn_review">Review &amp; Solution</string>
+    <string name="score_btn_exit">Go to Quiz List</string>
 
     <string name="mypage_title">My Page</string>
     <string name="mypage_nick_name">Nick Name : %1$s</string>

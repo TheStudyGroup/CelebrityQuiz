@@ -11,6 +11,7 @@ import com.thestudygroup.celebrityquiz.R;
 import com.thestudygroup.celebrityquiz.adapter.SolutionAdapter;
 import com.thestudygroup.celebrityquiz.vo.QuestionVO;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
@@ -28,17 +29,17 @@ public class SolutionActivity extends AppCompatActivity
             getSupportActionBar().setTitle("Results");
         }
 
-        int scoreValue = getIntent().getIntExtra("score", 0);
-        List<QuestionVO> quizList = (List<QuestionVO>) getIntent().getSerializableExtra("quizList");
+        final int          score    = getIntent().getIntExtra("score", 0);
+        final QuestionVO[] question = (QuestionVO[]) (getIntent().getSerializableExtra("question"));
 
         TextView scoreView = findViewById(R.id.scoreTextView);
-        scoreView.setText(String.valueOf(scoreValue));
+        scoreView.setText(String.valueOf(score));
 
         TextView scoreTotalView = findViewById(R.id.scoreTotalTextView);
-        scoreTotalView.setText(String.valueOf(quizList.size()));
+        scoreTotalView.setText(String.valueOf(question.length));
 
         RecyclerView recyclerView = findViewById(R.id.recyclerView);
-        SolutionAdapter solutionAdapter = new SolutionAdapter(quizList);
+        SolutionAdapter solutionAdapter = new SolutionAdapter(Arrays.asList(question));
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(solutionAdapter);
     }

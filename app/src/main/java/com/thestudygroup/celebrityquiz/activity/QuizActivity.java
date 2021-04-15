@@ -199,12 +199,10 @@ public class QuizActivity extends AppCompatActivity implements View.OnClickListe
         PreferenceManager.setInt(this, "total_score",  totalScore);
         PreferenceManager.setInt(this, "total_solved", totalSolved);
 
-        final ArrayList<QuestionVO> list = new ArrayList<>(Arrays.asList(questions));
-        final Intent intent = new Intent(QuizActivity.this, SolutionActivity.class);
+        final Intent intent = new Intent(QuizActivity.this, ScoreActivity.class);
         intent.putExtra("name", quizName);
         intent.putExtra("score", getScore());
-        intent.putExtra("quizList", list);
-        intent.setFlags(Intent. FLAG_ACTIVITY_CLEAR_TOP | Intent. FLAG_ACTIVITY_SINGLE_TOP );
+        intent.putExtra("question", questions);
         startActivity(intent);
         finish();
     }

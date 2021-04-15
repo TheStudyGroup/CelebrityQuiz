@@ -38,15 +38,15 @@ public class CategoryActivity extends AppCompatActivity implements ExpandableLis
         setContentView(R.layout.activity_category);
         Objects.requireNonNull(getSupportActionBar()).hide();
 
-        layoutLoading = findViewById(R.id.cat_loading);
-        recyclerView  = findViewById(R.id.cat_recyclerview);
+        layoutLoading = findViewById(R.id.category_loading);
+        recyclerView  = findViewById(R.id.category_recyclerview);
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         menuList = new ArrayList<>();
         adapter  = new ExpandableListAdapter(menuList, this, null);
         recyclerView.setAdapter(adapter);
 
-        DownloadTask.start(this, "https://pastebin.com/raw/a1VzBh7V");
+        DownloadTask.start(this, getString(R.string.category_json_url));
     }
 
     @Override
@@ -54,7 +54,7 @@ public class CategoryActivity extends AppCompatActivity implements ExpandableLis
         final String quizName = listItem.getText();
         final String quizUrl  = listItem.getHiddenText();
         if (quizUrl == null) {
-            Toast.makeText(this, "준비중인 퀴즈입니다", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Not available.", Toast.LENGTH_SHORT).show();
         } else {
             final Intent intent = new Intent(this, QuizActivity.class);
             intent.putExtra("name", quizName);
@@ -69,13 +69,19 @@ public class CategoryActivity extends AppCompatActivity implements ExpandableLis
         final Gson           gson  = new Gson();
         final MenuHeaderVO[] menus = gson.fromJson(data, MenuHeaderVO[].class);
         menuList.clear();
-        for (final MenuHeaderVO header : menus) {
-            final ExpandableListAdapter.ListItem list = new ExpandableListAdapter.ListItem(HEADER, header.getName());
-            list.invisibleChildren = new ArrayList<>();
-            for (final MenuChildVO child : header.getList()) {
-                list.invisibleChildren.add(new ExpandableListAdapter.ListItem(CHILD, child.getName(), child.getUrl()));
+        try {
+            for (final MenuHeaderVO header : menus) {
+                final ExpandableListAdapter.ListItem list = new ExpandableListAdapter.ListItem(HEADER, header.getName());
+                list.invisibleChildren = new ArrayList<>();
+                for (final MenuChildVO child : header.getList()) {
+                    list.invisibleChildren.add(new ExpandableListAdapter.ListItem(CHILD, child.getName(), child.getUrl()));
+                }
+                menuList.add(list);
             }
-            menuList.add(list);
+        } catch (Exception e) {
+            e.printStackTrace();
+            Toast.makeText(this, "Quiz not available.", Toast.LENGTH_SHORT).show();
+            finish();
         }
         layoutLoading.setVisibility(View.GONE);
         adapter.notifyDataSetChanged();
