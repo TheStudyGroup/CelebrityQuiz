@@ -6,6 +6,7 @@ import com.thestudygroup.celebrityquiz.R;
 import androidx.annotation.NonNull;
 
 import android.content.Intent;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -32,6 +33,8 @@ public class LoginActivity extends AppCompatActivity
         login = (Button) findViewById(R.id.login_btn_login);
         email_login = (EditText) findViewById(R.id.login_ID);
         pwd_login = (EditText) findViewById(R.id.login_PW);
+        String txt_email = email_login.getText().toString();
+        String txt_pwd = pwd_login.getText().toString();
         firebaseAuth = firebaseAuth.getInstance();//firebaseAuth의 인스턴스를 가져옴
 
         login.setOnClickListener(new View.OnClickListener() {
@@ -44,6 +47,8 @@ public class LoginActivity extends AppCompatActivity
                         .addOnCompleteListener(LoginActivity.this, new OnCompleteListener<AuthResult>() {
                             @Override
                             public void onComplete(@NonNull Task<AuthResult> task) {
+                                if( TextUtils.isEmpty(txt_email) || TextUtils.isEmpty(txt_pwd))//공백일때
+                                    Toast.makeText(LoginActivity.this, "fill txt" ,Toast.LENGTH_SHORT).show();
                                 if (task.isSuccessful()) {//성공했을때
                                     Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                                     startActivity(intent);
