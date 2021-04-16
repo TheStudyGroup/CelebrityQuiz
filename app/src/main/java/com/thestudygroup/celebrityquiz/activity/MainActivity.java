@@ -23,12 +23,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         final FirebaseAuth auth = FirebaseAuth.getInstance();
         final FirebaseUser user = auth.getCurrentUser();
-        final String       name = user.getEmail().split("@")[0];
 
         if (user == null) {
             startActivity(new Intent(this, LoginActivity.class));
             finish();
         }
+        
+        final String name = user.getEmail().split("@")[0];
         PreferenceManager.setString(this, "nick_name", name);
     }
 
