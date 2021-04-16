@@ -50,11 +50,11 @@ public class ExpandableListAdapter extends RecyclerView.Adapter<RecyclerView.Vie
         final LayoutInflater inflater = (LayoutInflater) viewGroup.getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         switch (viewType) {
             case HEADER:
-                final View viewHeader = inflater.inflate(R.layout.layout_list_header, viewGroup, false);
+                final View viewHeader = inflater.inflate(R.layout.item_category_header, viewGroup, false);
                 return new ListHeaderViewHolder(viewHeader);
             case CHILD:
             default:
-                final View viewChild = inflater.inflate(R.layout.layout_list_child, viewGroup, false);
+                final View viewChild = inflater.inflate(R.layout.item_category_child, viewGroup, false);
                 return new ListChildViewHolder(viewChild);
         }
     }

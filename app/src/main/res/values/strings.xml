@@ -25,6 +25,7 @@
     <string name="category_title">Category Select</string>
     <string name="category_loading_text">Downloading Category List ...</string>
 
+
     <string name="quiz_loading_text">Downloading Quiz Content ...</string>
     <string name="quiz_input_hint">Enter your answer</string>
 
@@ -35,8 +36,13 @@
     <string name="score_btn_review">Review &amp; Solution</string>
     <string name="score_btn_exit">Go to Quiz List</string>
 
+
+    <string name="ranking_title">User Ranking</string>
+    <string name="ranking_loading_text">Loading user ranking...</string>
+
+
     <string name="mypage_title">My Page</string>
-    <string name="mypage_nick_name">Nick Name : %1$s</string>
+    <string name="mypage_nick_name">%1$s</string>
     <string name="mypage_best_score">Best Score : %1$d</string>
     <string name="mypage_average_score">Average Score : %1$.2f</string>
     <string name="mypage_total_solved">Total Solved : %1$d</string>

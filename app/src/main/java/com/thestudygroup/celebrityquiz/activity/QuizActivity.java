@@ -16,15 +16,20 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
 import com.bumptech.glide.Glide;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.gson.Gson;
 import com.thestudygroup.celebrityquiz.R;
 import com.thestudygroup.celebrityquiz.common.PreferenceManager;
 import com.thestudygroup.celebrityquiz.download.DownloadListener;
 import com.thestudygroup.celebrityquiz.download.DownloadTask;
 import com.thestudygroup.celebrityquiz.vo.QuestionVO;
+import com.thestudygroup.celebrityquiz.vo.UserRankVO;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.Map;
 import java.util.Objects;
 
 public class QuizActivity extends AppCompatActivity implements View.OnClickListener, DownloadListener

@@ -6,7 +6,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.thestudygroup.celebrityquiz.R;
+import com.thestudygroup.celebrityquiz.common.PreferenceManager;
 
 import java.util.Objects;
 
@@ -17,6 +20,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Objects.requireNonNull(getSupportActionBar()).hide();
+
+        final FirebaseAuth auth = FirebaseAuth.getInstance();
+        final FirebaseUser user = auth.getCurrentUser();
+        final String       name = user.getEmail().split("@")[0];
+
+        if (user == null) {
+            startActivity(new Intent(this, LoginActivity.class));
+            finish();
+        }
+        PreferenceManager.setString(this, "nick_name", name);
     }
 
     @Override

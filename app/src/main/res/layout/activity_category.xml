@@ -34,13 +34,13 @@
             android:text="@string/category_loading_text"
             android:textSize="18sp"
             android:visibility="visible"
-            app:layout_constraintBottom_toTopOf="@+id/cat_loading_progress"
+            app:layout_constraintBottom_toTopOf="@+id/category_loading_progress"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <ProgressBar
-            android:id="@+id/cat_loading_progress"
+            android:id="@+id/category_loading_progress"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
@@ -48,6 +48,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/category_text_loading" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.recyclerview.widget.RecyclerView

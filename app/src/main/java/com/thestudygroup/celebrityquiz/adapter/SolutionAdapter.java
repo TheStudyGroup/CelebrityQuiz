@@ -23,23 +23,23 @@ import java.util.Objects;
 
 public class SolutionAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 {
-    private final List<QuestionVO> quizList;
+    private final List<QuestionVO> questions;
 
-    public SolutionAdapter(@NonNull final List<QuestionVO> quizList) {
-        this.quizList = quizList;
+    public SolutionAdapter(@NonNull final List<QuestionVO> questions) {
+        this.questions = questions;
     }
 
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull final ViewGroup viewGroup, int viewType) {
         final LayoutInflater inflater = (LayoutInflater) viewGroup.getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        final View view = inflater.inflate(R.layout.layout_solution, viewGroup, false);
+        final View view = inflater.inflate(R.layout.item_solution, viewGroup, false);
         return new RecyclerView.ViewHolder(view) {};
     }
 
     @Override
     public void onBindViewHolder(@NonNull final RecyclerView.ViewHolder viewHolder, final int position) {
-        if (quizList.isEmpty()) {
+        if (questions.isEmpty()) {
             return;
         }
 
@@ -52,7 +52,7 @@ public class SolutionAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         final RadioButton radioButton4 = viewHolder.itemView.findViewById(R.id.solution_radio4);
         final EditText    textAnswer   = viewHolder.itemView.findViewById(R.id.solution_answer_right);
         final EditText    textUser     = viewHolder.itemView.findViewById(R.id.solution_answer_user);
-        final QuestionVO quiz         = quizList.get(position);
+        final QuestionVO quiz         = questions.get(position);
 
         viewQuestion.setText(String.format("%s. %s", position + 1, quiz.question));
         Glide.with(imageView.getContext()).load(quiz.imageUrl).into(imageView);
@@ -100,7 +100,7 @@ public class SolutionAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
     @Override
     public int getItemCount() {
-        return quizList.size();
+        return questions.size();
     }
 
     @Override

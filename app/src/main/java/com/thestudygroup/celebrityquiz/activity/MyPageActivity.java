@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.thestudygroup.celebrityquiz.R;
 import com.thestudygroup.celebrityquiz.common.PreferenceManager;
 
@@ -39,7 +40,9 @@ public class MyPageActivity extends AppCompatActivity implements View.OnClickLis
         } else if (vid == R.id.mypage_btn_record) {
             startActivity(new Intent(this, RecordActivity.class));
         } else if (vid == R.id.mypage_btn_logout) {
-           //TODO
+            FirebaseAuth.getInstance().signOut();
+            startActivity(new Intent(this, LoginActivity.class));
+            finish();
         }
     }
 }

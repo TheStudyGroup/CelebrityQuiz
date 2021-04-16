@@ -17,68 +17,61 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.thestudygroup.celebrityquiz.R;
+import com.thestudygroup.celebrityquiz.common.PreferenceManager;
 
-public class RegisterActivity extends AppCompatActivity {
+import java.util.Objects;
+
+public class RegisterActivity extends AppCompatActivity implements View.OnClickListener
+{
 
     private static final String TAG = "RegisterActivity";
     private FirebaseAuth mAuth;
-    private Button sign_up;
+    private EditText editUserEmail;
+    private EditText editUserPassword;
+    private FirebaseAuth firebaseAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.avtivity_register);
+        Objects.requireNonNull(getSupportActionBar()).hide();
 
-        mAuth = FirebaseAuth.getInstance();
-
-        sign_up = findViewById(R.id.register_btn_login);
-        sign_up.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                signUp();
-            }
-        });
+        editUserEmail    = findViewById(R.id.register_edit_email);
+        editUserPassword = findViewById(R.id.register_edit_password);
+        firebaseAuth     = FirebaseAuth.getInstance();
     }
 
-    // When initializing your Activity, check to see if the user is currently signed in.
     @Override
-    public void onStart() {
-        super.onStart();
-        // Check if user is signed in (non-null) and update UI accordingly.
-        FirebaseUser currentUser = mAuth.getCurrentUser();
+    public void onClick(final View view) {
+        final int vid = view.getId();
+        if (vid == R.id.register_btn_login) {
+            signUp();
+        }
     }
-
 
     private void signUp() {
-        // 이메일
-        EditText emailEditText = findViewById(R.id.register_id);
-        String email = emailEditText.getText().toString();
-        // 비밀번호
-        EditText passwordEditText = findViewById(R.id.register_pw);
-        String password = passwordEditText.getText().toString();
+        try {
+            final String userEmail = editUserEmail.getText().toString().trim();
+            final String userPassword = editUserPassword.getText().toString().trim();
 
-        mAuth.createUserWithEmailAndPassword(email, password)
-                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
+            firebaseAuth.createUserWithEmailAndPassword(userEmail, userPassword)
+                    .addOnCompleteListener(this, task -> {
                         if (task.isSuccessful()) {
-                            // Sign in success, update UI with the signed-in user's information
                             Log.d(TAG, "createUserWithEmail:success");
-                            FirebaseUser user = mAuth.getCurrentUser();
+                            FirebaseUser user = firebaseAuth.getCurrentUser();
                             Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
                             startActivity(intent);
-                            Toast.makeText(RegisterActivity.this, "등록 완료", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(RegisterActivity.this, "Success", Toast.LENGTH_SHORT).show();
                             finish();
                         } else {
-                            // If sign in fails, display a message to the user.
                             Log.w(TAG, "createUserWithEmail:failure", task.getException());
-                            Toast.makeText(RegisterActivity.this, "등록 에러", Toast.LENGTH_SHORT).show();
-                            return;
+                            Toast.makeText(RegisterActivity.this, "Error", Toast.LENGTH_SHORT).show();
                         }
-                    }
-                });
+                    });
+        } catch (Exception e) {
+            e.printStackTrace();
+            Toast.makeText(this, "Enter correct email and password.", Toast.LENGTH_SHORT).show();
+        }
     }
-
-    Intent intent = getIntent();
 
 }
