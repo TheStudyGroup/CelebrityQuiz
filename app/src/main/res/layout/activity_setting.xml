@@ -2,13 +2,12 @@
 
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/mainContent"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:layout_gravity="center"
+    android:orientation="vertical"
     tools:context=".activity.SettingActivity">
 
     <TextView
@@ -38,7 +37,7 @@
         app:layout_constraintTop_toBottomOf="@+id/setting_title">
 
         <TextView
-            android:id="@+id/timeHeader"
+            android:id="@+id/setting_text_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/timeTitle" />
@@ -83,11 +82,12 @@
         android:orientation="vertical"
         android:padding="16dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout">
 
         <TextView
-            android:id="@+id/levelHeader"
+            android:id="@+id/setting_text_level"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/settingsTitle" />

@@ -8,7 +8,7 @@
     tools:context=".activity.SolutionActivity">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/ranking_recyclerview"
+        android:id="@+id/solution_recyclerview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -16,7 +16,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
-        android:id="@+id/scoreViewBackground"
+        android:id="@+id/solution_view_background"
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:layout_marginTop="70dp"
@@ -27,36 +27,36 @@
         app:srcCompat="@drawable/button_rounded" />
 
     <View
-        android:id="@+id/scoreViewDivider"
+        android:id="@+id/solution_view_divider"
         style="@style/HorizontalDivider"
         android:layout_width="100dp"
         android:layout_height="4dp"
         android:background="@color/colorPrimary"
-        app:layout_constraintBottom_toBottomOf="@+id/scoreViewBackground"
-        app:layout_constraintEnd_toEndOf="@+id/scoreViewBackground"
-        app:layout_constraintStart_toStartOf="@+id/scoreViewBackground"
-        app:layout_constraintTop_toTopOf="@+id/scoreViewBackground" />
+        app:layout_constraintBottom_toBottomOf="@+id/solution_view_background"
+        app:layout_constraintEnd_toEndOf="@+id/solution_view_background"
+        app:layout_constraintStart_toStartOf="@+id/solution_view_background"
+        app:layout_constraintTop_toTopOf="@+id/solution_view_background" />
 
     <TextView
-        android:id="@+id/scoreTextView"
+        android:id="@+id/solution_text_user"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/colorPrimary"
         android:textSize="30sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/scoreViewDivider"
-        app:layout_constraintEnd_toEndOf="@+id/scoreViewBackground"
-        app:layout_constraintStart_toStartOf="@id/scoreViewBackground"/>
+        app:layout_constraintBottom_toTopOf="@+id/solution_view_divider"
+        app:layout_constraintEnd_toEndOf="@+id/solution_view_background"
+        app:layout_constraintStart_toStartOf="@id/solution_view_background"/>
 
     <TextView
-        android:id="@+id/scoreTotalTextView"
+        android:id="@+id/solution_text_total"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/colorPrimary"
         android:textSize="30sp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="@+id/scoreViewBackground"
-        app:layout_constraintStart_toStartOf="@id/scoreViewBackground"
-        app:layout_constraintTop_toBottomOf="@+id/scoreViewDivider" />
+        app:layout_constraintEnd_toEndOf="@+id/solution_view_background"
+        app:layout_constraintStart_toStartOf="@id/solution_view_background"
+        app:layout_constraintTop_toBottomOf="@+id/solution_view_divider" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

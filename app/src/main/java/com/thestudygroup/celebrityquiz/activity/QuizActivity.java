@@ -130,8 +130,6 @@ public class QuizActivity extends AppCompatActivity implements View.OnClickListe
         finish();
     }
 
-
-
     private void displayQuiz() {
         final QuestionVO quiz = questions[currentQuizIndex];
         questionView.setText(String.format("%s. %s", currentQuizIndex + 1, quiz.question));
@@ -211,7 +209,6 @@ public class QuizActivity extends AppCompatActivity implements View.OnClickListe
         startActivity(intent);
         finish();
     }
-
 
     private void startTimer() {
         textTime.setText(String.valueOf(seconds));

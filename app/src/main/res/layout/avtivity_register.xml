@@ -7,7 +7,7 @@
     android:layout_height="match_parent">
 
     <TextView
-        android:id="@+id/register_title"
+        android:id="@+id/register_text_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="80dp"
@@ -33,7 +33,7 @@
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/register_title" />
+        app:layout_constraintTop_toBottomOf="@+id/register_text_title" />
 
     <EditText
         android:id="@+id/register_edit_password"

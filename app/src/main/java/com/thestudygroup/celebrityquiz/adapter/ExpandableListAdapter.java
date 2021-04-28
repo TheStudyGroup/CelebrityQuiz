@@ -157,8 +157,8 @@ public class ExpandableListAdapter extends RecyclerView.Adapter<RecyclerView.Vie
 
         public ListHeaderViewHolder(final View itemView) {
             super(itemView);
-            textView  = itemView.findViewById(R.id.list_header_title);
-            btnExpand = itemView.findViewById(R.id.list_header_expand);
+            textView  = itemView.findViewById(R.id.item_header_title);
+            btnExpand = itemView.findViewById(R.id.item_header_expand);
         }
     }
 
@@ -167,8 +167,8 @@ public class ExpandableListAdapter extends RecyclerView.Adapter<RecyclerView.Vie
 
         public ListChildViewHolder(final View itemView) {
             super(itemView);
-            textView = itemView.findViewById(R.id.list_child_title);
-            btnStart = itemView.findViewById(R.id.list_child_btn);
+            textView = itemView.findViewById(R.id.item_child_title);
+            btnStart = itemView.findViewById(R.id.item_child_btn);
             btnStart.setOnClickListener(this);
         }
     }

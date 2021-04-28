@@ -8,7 +8,6 @@ import com.thestudygroup.celebrityquiz.R;
 
 public class RecordActivity extends AppCompatActivity
 {
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

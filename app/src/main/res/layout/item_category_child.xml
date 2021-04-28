@@ -10,7 +10,7 @@
     android:background="@drawable/border_list_child">
 
     <TextView
-        android:id="@+id/list_child_title"
+        android:id="@+id/item_child_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
@@ -22,7 +22,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageButton
-        android:id="@+id/list_child_btn"
+        android:id="@+id/item_child_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="20dp"

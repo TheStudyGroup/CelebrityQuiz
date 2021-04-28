@@ -36,9 +36,9 @@ public class RankingAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
             return;
         }
 
-        final TextView textRankIndex = viewHolder.itemView.findViewById(R.id.rank_item_text_index);
-        final TextView textRankName  = viewHolder.itemView.findViewById(R.id.rank_item_text_name);
-        final TextView textRankScore = viewHolder.itemView.findViewById(R.id.rank_item_text_score);
+        final TextView textRankIndex = viewHolder.itemView.findViewById(R.id.item_rank_text_index);
+        final TextView textRankName  = viewHolder.itemView.findViewById(R.id.item_rank_text_name);
+        final TextView textRankScore = viewHolder.itemView.findViewById(R.id.item_rank_text_score);
 
         textRankIndex.setText(Integer.toString(position + 1));
         textRankName.setText(users.get(position).name);

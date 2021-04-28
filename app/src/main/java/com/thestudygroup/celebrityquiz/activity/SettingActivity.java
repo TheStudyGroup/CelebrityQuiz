@@ -75,5 +75,4 @@ public class SettingActivity extends AppCompatActivity implements View.OnClickLi
             PreferenceManager.setInt(this, "level", 3);
         }
     }
-
 }

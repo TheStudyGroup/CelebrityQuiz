@@ -31,9 +31,9 @@ public class SolutionActivity extends AppCompatActivity
         final int          score    = getIntent().getIntExtra("score", 0);
         final QuestionVO[] question = (QuestionVO[]) (getIntent().getSerializableExtra("question"));
 
-        final TextView        textUserScore   = findViewById(R.id.scoreTextView);
-        final TextView        textTotalScore  = findViewById(R.id.scoreTotalTextView);
-        final RecyclerView    recyclerView    = findViewById(R.id.ranking_recyclerview);
+        final TextView        textUserScore   = findViewById(R.id.solution_text_user);
+        final TextView        textTotalScore  = findViewById(R.id.solution_text_total);
+        final RecyclerView    recyclerView    = findViewById(R.id.solution_recyclerview);
         final SolutionAdapter solutionAdapter = new SolutionAdapter(Arrays.asList(question));
 
         textUserScore.setText(String.valueOf(score));

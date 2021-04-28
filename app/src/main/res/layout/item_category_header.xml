@@ -10,7 +10,7 @@
     android:background="@drawable/border_list_header">
 
     <TextView
-        android:id="@+id/list_header_title"
+        android:id="@+id/item_header_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
@@ -23,7 +23,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
-        android:id="@+id/list_header_expand"
+        android:id="@+id/item_header_expand"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="20dp"

@@ -6,7 +6,7 @@
     android:orientation="vertical">
 
     <TextView
-        android:id="@+id/solution_content"
+        android:id="@+id/item_sol_text_content"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
@@ -16,7 +16,7 @@
         android:textStyle="bold" />
 
     <ImageView
-        android:id="@+id/solution_image"
+        android:id="@+id/item_sol_image"
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:layout_marginStart="50dp"
@@ -28,7 +28,7 @@
         tools:ignore="UnusedAttribute" />
 
     <RadioGroup
-        android:id="@+id/solution_radio_group"
+        android:id="@+id/item_sol_radio_group"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
@@ -37,32 +37,32 @@
         android:orientation="vertical">
 
         <RadioButton
-            android:id="@+id/solution_radio1"
+            android:id="@+id/item_sol_radio1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:enabled="false" />
 
         <RadioButton
-            android:id="@+id/solution_radio2"
+            android:id="@+id/item_sol_radio2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:enabled="false" />
 
         <RadioButton
-            android:id="@+id/solution_radio3"
+            android:id="@+id/item_sol_radio3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:enabled="false" />
 
         <RadioButton
-            android:id="@+id/solution_radio4"
+            android:id="@+id/item_sol_radio4"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:enabled="false" />
     </RadioGroup>
 
     <EditText
-        android:id="@+id/solution_answer_right"
+        android:id="@+id/item_sol_answer_right"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
@@ -73,7 +73,7 @@
         android:inputType="text" />
 
     <EditText
-        android:id="@+id/solution_answer_user"
+        android:id="@+id/item_sol_answer_user"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"

@@ -43,15 +43,15 @@ public class SolutionAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             return;
         }
 
-        final TextView    viewQuestion = viewHolder.itemView.findViewById(R.id.solution_content);
-        final ImageView   imageView    = viewHolder.itemView.findViewById(R.id.solution_image);
-        final RadioGroup  radioGroup   = viewHolder.itemView.findViewById(R.id.solution_radio_group);
-        final RadioButton radioButton1 = viewHolder.itemView.findViewById(R.id.solution_radio1);
-        final RadioButton radioButton2 = viewHolder.itemView.findViewById(R.id.solution_radio2);
-        final RadioButton radioButton3 = viewHolder.itemView.findViewById(R.id.solution_radio3);
-        final RadioButton radioButton4 = viewHolder.itemView.findViewById(R.id.solution_radio4);
-        final EditText    textAnswer   = viewHolder.itemView.findViewById(R.id.solution_answer_right);
-        final EditText    textUser     = viewHolder.itemView.findViewById(R.id.solution_answer_user);
+        final TextView    viewQuestion = viewHolder.itemView.findViewById(R.id.item_sol_text_content);
+        final ImageView   imageView    = viewHolder.itemView.findViewById(R.id.item_sol_image);
+        final RadioGroup  radioGroup   = viewHolder.itemView.findViewById(R.id.item_sol_radio_group);
+        final RadioButton radioButton1 = viewHolder.itemView.findViewById(R.id.item_sol_radio1);
+        final RadioButton radioButton2 = viewHolder.itemView.findViewById(R.id.item_sol_radio2);
+        final RadioButton radioButton3 = viewHolder.itemView.findViewById(R.id.item_sol_radio3);
+        final RadioButton radioButton4 = viewHolder.itemView.findViewById(R.id.item_sol_radio4);
+        final EditText    textAnswer   = viewHolder.itemView.findViewById(R.id.item_sol_answer_right);
+        final EditText    textUser     = viewHolder.itemView.findViewById(R.id.item_sol_answer_user);
         final QuestionVO quiz         = questions.get(position);
 
         viewQuestion.setText(String.format("%s. %s", position + 1, quiz.question));
